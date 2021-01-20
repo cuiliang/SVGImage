@@ -36,6 +36,8 @@ namespace SVGImage.SVG
 
         public bool UseAnimations { get; set; }
 
+        public Color DefaultColor { get; set; } = Colors.Black;
+
         public Color? OverrideColor { get; set; }
        
         public double? OverrideStrokeWidth { get; set; }
@@ -125,7 +127,7 @@ namespace SVGImage.SVG
                 }
                 var brush = stroke.StrokeBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
-                    brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
+                    brush = new SolidColorBrush(Color.FromArgb((byte)(OverrideColor.Value.A * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 item.Pen = new Pen(brush, stroke.Width);
                 if (stroke.StrokeArray != null)
                 {
@@ -166,9 +168,9 @@ namespace SVGImage.SVG
 
             if (shape.Fill == null)
             {
-                item.Brush = Brushes.Black;
+                item.Brush = new SolidColorBrush(DefaultColor);
                 if (OverrideColor != null)
-                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
+                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(OverrideColor.Value.A * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
                 g.FillRule = FillRule.Nonzero;
                 g.Children.Add(geometry);
@@ -178,7 +180,7 @@ namespace SVGImage.SVG
             {
                 item.Brush = shape.Fill.FillBrush(this.SVG, this, shape, shape.Opacity, geometry.Bounds);
                 if (OverrideColor != null)
-                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(255 * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
+                    item.Brush = new SolidColorBrush(Color.FromArgb((byte)(OverrideColor.Value.A * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
                 g.FillRule = FillRule.Nonzero;
                 if (shape.Fill.FillRule == Fill.eFillRule.evenodd) g.FillRule = FillRule.EvenOdd;

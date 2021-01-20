@@ -4,17 +4,16 @@ namespace SVGImage.SVG.Shapes
 {
     public class RectangleShape : Shape
     {
-        private static Fill DefaultFill = null;
-
-        public override Fill Fill
-        {
-            get
-            {
-                Fill f = base.Fill;
-                if (f == null) f = DefaultFill;
-                return f;
-            }
-        }
+        //private static Fill DefaultFill = null;
+        //public override Fill Fill
+        //{
+        //    get
+        //    {
+        //        Fill f = base.Fill;
+        //        if (f == null) f = DefaultFill;
+        //        return f;
+        //    }
+        //}
 
         public double X { get; set; }
 
@@ -30,11 +29,11 @@ namespace SVGImage.SVG.Shapes
 
         public RectangleShape(SVG svg, XmlNode node) : base(svg, node)
         {
-            if (DefaultFill == null)
-            {
-                DefaultFill = new Fill(svg);
-                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
-            }
+            //if (DefaultFill == null)
+            //{
+            //    DefaultFill = new Fill(svg);
+            //    DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
+            //}
         }
 
         protected override void Parse(SVG svg, string name, string value)

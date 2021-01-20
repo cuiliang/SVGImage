@@ -12,18 +12,18 @@ namespace SVGImage.SVG
 		public double Y { get; set; }
 		public string Text { get; set; }
 		public TSpan.Element TextSpan {get; private set;}
-		static Fill DefaultFill = null;
+		//static Fill DefaultFill = null;
 		static Stroke DefaultStroke = null;
-		public override Fill Fill 
-		{ 
-			get 
-			{
-				Fill f = base.Fill;
-				if (f == null)
-					f = DefaultFill;
-				return f;
-			}
-		}
+		//public override Fill Fill 
+		//{ 
+		//	get 
+		//	{
+		//		Fill f = base.Fill;
+		//		if (f == null)
+		//			f = DefaultFill;
+		//		return f;
+		//	}
+		//}
 		public override Stroke Stroke
 		{ 
 			get 
@@ -43,11 +43,11 @@ namespace SVGImage.SVG
 			// check for tSpan tag
 			if (node.InnerXml.IndexOf("<") >= 0)
 				this.TextSpan = this.ParseTSpan(svg, node.InnerXml);
-			if (DefaultFill == null)
-			{
-				DefaultFill = new Fill(svg);
-				DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
-			}
+			//if (DefaultFill == null)
+			//{
+			//	DefaultFill = new Fill(svg);
+			//	DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
+			//}
 			if (DefaultStroke == null)
 			{
 				DefaultStroke = new Stroke(svg);

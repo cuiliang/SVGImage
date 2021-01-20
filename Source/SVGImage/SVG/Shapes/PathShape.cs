@@ -171,17 +171,17 @@ namespace SVGImage.SVG
         }
         List<PathElement> m_elements = new List<PathElement>();
 
-        static Fill DefaultFill = null;
-        public override Fill Fill
-        {
-            get
-            {
-                Fill f = base.Fill;
-                if (f == null)
-                    f = DefaultFill;
-                return f;
-            }
-        }
+        //static Fill DefaultFill = null;
+        //public override Fill Fill
+        //{
+        //    get
+        //    {
+        //        Fill f = base.Fill;
+        //        if (f == null)
+        //            f = DefaultFill;
+        //        return f;
+        //    }
+        //}
         public IList<PathElement> Elements
         {
             get
@@ -197,11 +197,11 @@ namespace SVGImage.SVG
         // http://apike.ca/prog_svg_paths.html
         public PathShape(SVG svg, XmlNode node, Shape parent) : base(svg, node, parent)
         {
-            if (DefaultFill == null)
-            {
-                DefaultFill = new Fill(svg);
-                DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
-            }
+            //if (DefaultFill == null)
+            //{
+            //    DefaultFill = new Fill(svg);
+            //    DefaultFill.PaintServerKey = svg.PaintServers.Parse("black");
+            //}
 
             this.ClosePath = false;
             string path = XmlUtil.AttrValue(node, "d", string.Empty);
