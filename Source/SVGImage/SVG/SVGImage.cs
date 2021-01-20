@@ -445,12 +445,16 @@ namespace SVGImage.SVG
 
         protected override Size MeasureOverride(Size constraint)
         {
-            Size result = base.MeasureOverride(constraint);
+            //Size result = base.MeasureOverride(constraint);
+
+            Size result = constraint;
+
             if (this.SizeType == eSizeType.SizeToContent)
             {
                 if (this.m_drawing != null && !this.m_drawing.Bounds.Size.IsEmpty)
                     result = this.m_drawing.Bounds.Size;
             }
+
             if (constraint.Width > 0 && constraint.Width < result.Width)
                 result.Width = constraint.Width;
             if (constraint.Height > 0 && constraint.Height < result.Height)
