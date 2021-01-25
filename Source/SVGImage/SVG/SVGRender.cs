@@ -168,7 +168,16 @@ namespace SVGImage.SVG
 
             if (shape.Fill == null)
             {
-                item.Brush = new SolidColorBrush(DefaultColor);
+                if (shape.Stroke == null )
+                {
+                    item.Brush = new SolidColorBrush(DefaultColor);
+                }
+                else
+                {
+                    // 设定了stroke，表示用stroke画线？ fill使用透明
+                    item.Brush = new SolidColorBrush(Colors.Transparent);
+                }
+                
                 if (OverrideColor != null)
                     item.Brush = new SolidColorBrush(Color.FromArgb((byte)(OverrideColor.Value.A * shape.Opacity), OverrideColor.Value.R, OverrideColor.Value.G, OverrideColor.Value.B));
                 GeometryGroup g = new GeometryGroup();
