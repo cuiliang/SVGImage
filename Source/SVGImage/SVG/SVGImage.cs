@@ -447,18 +447,22 @@ namespace SVGImage.SVG
         {
             //Size result = base.MeasureOverride(constraint);
 
-            Size result = constraint;
+            Size result = this.m_drawing.Bounds.Size;
 
             if (this.SizeType == eSizeType.SizeToContent)
             {
                 if (this.m_drawing != null && !this.m_drawing.Bounds.Size.IsEmpty)
                     result = this.m_drawing.Bounds.Size;
             }
+            else
+            {
+                if (constraint.Width > 0 && constraint.Width < result.Width)
+                    result.Width = constraint.Width;
+                if (constraint.Height > 0 && constraint.Height < result.Height)
+                    result.Height = constraint.Height;
+            }
 
-            if (constraint.Width > 0 && constraint.Width < result.Width)
-                result.Width = constraint.Width;
-            if (constraint.Height > 0 && constraint.Height < result.Height)
-                result.Height = constraint.Height;
+          
 
             return result;
         }
