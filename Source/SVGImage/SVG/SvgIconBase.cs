@@ -369,10 +369,11 @@ namespace SVGImage.SVG
         }
 
         #endregion
+    }
 
         #region FileSvgReader Class
 
-        private sealed class FileSvgReader : IDisposable
+    internal sealed class FileSvgReader : IDisposable
         {
             public const string GZipSignature = "H4sI";
 
@@ -424,41 +425,50 @@ namespace SVGImage.SVG
                 }
             }
 
-            public DrawingGroup Read(string filepath)
+        public DrawingGroup Read(string filepath, SVGRender svgRender = null)
             {
                 if (string.IsNullOrWhiteSpace(filepath))
                 {
                     return new DrawingGroup();
                 }
 
-                var svgRender = new SVGRender(new FileSystemLoader());
+            if (svgRender == null)
+            {
+                svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+            }
 
                 return svgRender.LoadDrawing(filepath);
             }
 
-            public DrawingGroup Read(Uri fileUri)
+        public DrawingGroup Read(Uri fileUri, SVGRender svgRender = null)
             {
                 if (fileUri == null)
                 {
                     return new DrawingGroup();
                 }
 
-                var svgRender = new SVGRender(new FileSystemLoader());
+            if (svgRender == null)
+            {
+                svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+            }
 
                 return svgRender.LoadDrawing(fileUri);
             }
 
-            public DrawingGroup Read(Stream stream)
+        public DrawingGroup Read(Stream stream, SVGRender svgRender = null)
             {
                 if (stream == null)
                 {
                     return new DrawingGroup();
                 }
 
-                var svgRender = new SVGRender(new FileSystemLoader());
+            if (svgRender == null)
+            {
+                svgRender = new SVGRender(new FileSystemLoader());
                 svgRender.OverrideColor = _overrideColor;
+            }
 
                 return svgRender.LoadDrawing(stream);
             }
@@ -526,5 +536,4 @@ namespace SVGImage.SVG
         }
 
         #endregion
-    }
 }
